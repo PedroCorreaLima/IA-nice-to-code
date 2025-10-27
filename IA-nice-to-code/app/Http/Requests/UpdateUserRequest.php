@@ -22,11 +22,30 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $userId = $this->route()->parameter('users');
-
         return [
+            'user_id' => ['required', Rule::exists('users', 'id')],
             'name'  => ['required'],
-            'email' => ['required','email', Rule::unique('users','email')->ignore($userId)],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->route()->parameter('users'))],
+        ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'user_id' => $this->route()->parameter('users'),
+        ]);
+    }
+
+    /**
+     * Get the validation messages for the defined rules.
+     */
+    public function messages(): array
+    {
+        return [
+            'user_id.exists' => 'Usuário inexistente',
         ];
     }
 }
