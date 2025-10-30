@@ -1,7 +1,7 @@
 function Header () {
     // JSX
     return (
-        <h1>
+        <h1 className="banner">
             Bem vindo! É novo aqui?
         </h1>
     )

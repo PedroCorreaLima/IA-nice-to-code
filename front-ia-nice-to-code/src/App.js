@@ -1,30 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 import Banner from './components/Banner/Banner';
+import LoginButton from './components/LoginButton/LoginButton';
+import SingUp from './components/SingUpButton/SingUpButton';
 
 function App() {
   return (
     <div className="App">
-      <Banner />
+
+    <Banner />
+    <LoginButton /> 
+    <SingUp />
       
-      <header className="App-header">
-        <h1>
-          Bem vindo! É novo aqui? 
-        </h1>
-        
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Bem vindo ao React.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }
