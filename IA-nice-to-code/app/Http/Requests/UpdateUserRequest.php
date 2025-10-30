@@ -23,9 +23,9 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', Rule::exists('users', 'id')],
-            'name'  => ['required'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->route()->parameter('users'))],
+            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'name'  => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->route($id))],
         ];
     }
 
@@ -35,7 +35,7 @@ class UpdateUserRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'user_id' => $this->route()->parameter('users'),
+            'user_id' => $this->route('id'),
         ]);
     }
 
